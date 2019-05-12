@@ -63,8 +63,8 @@ Except automation server or service CI/CD process may require additional softwar
 - All sorts of communication apps
 
 ## Sources
-https://jenkins.io/doc/book/pipeline/jenkinsfile/
-https://martinfowler.com/articles/continuousIntegration.html
-https://www.thoughtworks.com/continuous-integration
-https://css-tricks.com/continuous-integration-continuous-deployment/
+- https://jenkins.io/doc/book/pipeline/jenkinsfile/
+- https://martinfowler.com/articles/continuousIntegration.html
+- https://www.thoughtworks.com/continuous-integration
+- https://css-tricks.com/continuous-integration-continuous-deployment/
 
