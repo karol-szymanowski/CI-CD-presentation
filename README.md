@@ -1,4 +1,4 @@
-# CI/CD - Jenkins
+# CI/CD - Presentation
 This presentation has been prepared to bring the CI / CD process concept closer, showing its advantages and use-cases. The presentation consists of:
  - the theoretical part - this presentation
  - the practical part - Jenkins pipeline configuration using Jenkinsfile
@@ -106,5 +106,7 @@ However, if more advanced solutions are needed, it is worth consider using solut
 - https://medium.com/@dpaunin/the-best-architecture-with-docker-and-kubernetes-myth-or-reality-77b4f8f3804d
 - https://atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment
 - https://medium.com/@nirespire/what-is-cicd-concepts-in-continuous-integration-and-deployment-4fe3f6625007
+- https://medium.com/dailyjs/why-you-should-always-use-a-linter-and-or-pretty-formatter-bb5471115a76
+- https://en.wikipedia.org/wiki/Apache_Groovy
 
 The presentation was created using [reveal.js](https://github.com/hakimel/reveal.js/)

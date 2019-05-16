@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>CI/CD</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
@@ -25,8 +25,210 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>CI/CD</h1>
+					<img src="assets/CI:CD%20big.png">
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## CI/CD stands for...
+						- Continuous Integration
+						- Continuous Delivery
+						- <span data-fragment-index="1" class="fragment fade-left">Continuous Deployment</span>
+					</textarea>
+				</section>
+				<section>
+					<section>
+						<h2>Continuous Integration</h2>
+						CI is all about integrating code and making sure it works.
+					</section>
+					<section>
+						<img src="assets/continious-integration.png">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Continuous Delivery</h2>
+						Continuous delivery is an extension of continuous integration.
+					</section>
+					<section>
+						This means that on top of having automated testing, you also have to automate your release process which will allow deploy application at any point of time by clicking on a button.
+					</section>
+					<section>
+						<img src="assets/press%20button.png">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Continuous Deployment</h2>
+						Continuous deployment goes one step further than continuous delivery.
+					</section>
+					<section>
+						With this practice, every change that passes all stages of your production pipeline is released to your customers. There's no human intervention, and only a failed test will prevent a new change to be deployed to production.
+					</section>
+					<section>
+						<img src="assets/0_781mLWOCCsP5EAHa.png">
+					</section>
+				</section>
+				<section>
+					<h3>So what's the difference?</h3>
+					<img src="assets/CIvsCDvsCD.png">
+				</section>
+				<section>
+					<section>
+						<h2>Advantages and costs of implementing CI/CD</h2>
+						CI/CD is an investment!
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							### Continuous Integration - advantages:
+							- Less buggy product
+							- Building release is getting easier as all integration issues have been solved
+							- Whole team is reported about build process
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							### Continuous Integration - costs:
+							- Team needs to write automated tests
+							- Server for automated tests is required
+							- Devs need to merge their changes as often as possible
+						</textarea>
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							### Continuous Delivery - advantages:
+							- Automated process of deploying software
+							- Releases may happens more frequently
+							- Hotfixes and small improvements can be shipped to production much faster
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							### Continuous Delivery - costs:
+							- Strong foundations in CI process
+							- Special mindset while developing software is needed
+						</textarea>
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							### Continuous Deployment - advantages:
+							- No release days
+							- Release are less risky
+							- Team can fully focus on developing new features
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							### Continuous Deployment - costs:
+							- Testing culture must be at its best. CD process require the highest quality of tests
+							- Documentation needs to be updated frequently to keep up after deployments
+							- Overall process is knowlegde demanding and require experienced team
+						</textarea>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>How to prepare project for CI/CD?</h2>
+						Following good practises is a good start...
+						<img src="assets/process.png">
+					</section>
+					<section>
+						<h3>Use logger middleware for yours apps</h3>
+						<img src="assets/console.png">
+					</section>
+					<section>
+						<h3>Use linters</h3>
+						A linter will help avoid errors, and things that could not be errors (but look like them) or could be potentially dangerous.
+						<img src="assets/linter.png">
+					</section>
+					<section>
+						<h3>Write at least basic unit tests</h3>
+						These are the foundations of a well-designed CI.
+					</section>
+					<section>
+						<h3>Dependencies should have fixed versions, use `~` instead of `^`</h3>
+						And don't forget to always commit at least one of yarn.lock or package-lock.json depending on which package manager you're using.
+					</section>
+					<section>
+						<h3>Use dockerfile</h3>
+						<img src="assets/dockerfile.png">
+					</section>
+					<section>
+						<h3>Create a foundations for integration tests</h3>
+						<ul>
+							<li>Prepare docker-compose.yml file</li>
+							<li>Make use of ORM's libraries like 'sequelize'</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Jenkinsfile</h3>
+						<img src="assets/jenkins-logo.jpg">
+					</section>
+					<section>
+						<h3>Uses groovy syntax</h3>
+						<pre>
+							<code class="hljs" data-line-numbers="3-6">
+def hashPath(packVer, length = 16) {
+    hash = sh(
+        script: "date | shasum -a 256 | awk \'{print substr(\$0,0,${length})}\'",
+        returnStdout: true
+    ).trim()
+    ver = sh(
+        script: "echo ${packVer} | tr -d '.'",
+        returnStdout: true
+    ).trim()
+    return "${ver}${hash}"
+}
+
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h3>Let you integrate with 3rd party software</h3>
+						<pre>
+							<code class="hljs" data-line-numbers="4-8">
+post {
+    success {
+	slackSend(
+	  channel: "$slackChannel",
+	  color: 'good',
+	  message: "App successfully deployed - *(${env.BUILD_NUMBER}) ${env.JOB_NAME}* (<${env.BUILD_URL}|Open>)"
+	)
+    }
+}
+
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h3>Easy integration with docker</h3>
+						<pre>
+							<code class="hljs" data-line-numbers="1-8">
+  agent {
+    docker {
+      image 'node:10.15'
+      args '-u root:root'
+      reuseNode true
+    }
+  }
+
+							</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<h3>Thank you</h3>
+					You can find this presentation at https://github.com/tetrash/CI-CD-presentation
+				</section>
 			</div>
 		</div>
 
