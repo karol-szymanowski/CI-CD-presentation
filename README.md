@@ -1,6 +1,6 @@
 # CI/CD - Presentation
 This presentation has been prepared to bring the CI / CD process concept closer, showing its advantages and use-cases. The presentation consists of:
- - the theoretical part - this presentation
+ - the theoretical part - this presentation (article below is my cheatsheet for this presentation)
  - the practical part - Jenkins pipeline configuration using Jenkinsfile
 
 ### Presentation content:
